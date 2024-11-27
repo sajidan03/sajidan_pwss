@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form action="" method="post">
+        <input type="search" name="txt_cari" id=""> <input type="submit" value="CARI" name="cari">
+    </form>
+    <table border="1">
+    <tr>
+        <td>No</td>
+        <td>Nama</td>
+        <td>Username</td>
+        <td>Password</td>
+        <td>Level</td>
+    </tr>
+    <?php
+    include "koneksi.php";
+    echo 'Search user';
+    if (isset($_POST['cari'])) {
+        $cari = $_POST['txt_cari'];
+        $query = mysqli_query($koneksi, "SELECT * FROM users WHERE nama like '%$cari%' OR username like '%cari%'");
+    }else {
+        $query = mysqli_query($koneksi, "SELECT * FROM users");
+    }
+    $no = 1;
+    while ($data = mysqli_fetch_array(($query))) {
+    ?>
+        <tr>
+            <td><?= $no ?></td>
+            <td><?= $data['nama'] ?></td>
+            <td><?= $data['username']?></td>
+            <td><?= $data['password']?></td>
+            <td><?= $data['level']?></td>
+        </tr>
+        <?php
+        $no++;
+    }
+    ?>
+    </table>
+
+    <table border="1">
+        <tr>
+            <td>Id</td>
+            <td>Nama produk</td>
+            <td>Harga</td>
+            <td>Jumlah produk</td>
+            <td>Foto Produk</td>
+            <td>Id Kategori</td>
+        </tr>
+        <?php
+        include "koneksi.php";
+        echo "Tambah produk";
+        if (isset($_POST['txt_cari2'])) {
+            $cari = $_POST['cari2'];
+            $query = mysqli_query($koneksi, "SELECT * FROM users WHERE nama_produk like '%cari2%'");
+        }else {
+        }
+        ?>
+    </table>
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sajidan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button>
+        <a href="tambah.php">Tambah data</a>
+    </button>
+    <form action="" method="post">
+        <input type="search" name="txt_cari" id=""> <input type="submit" value="CARI" name="cari">
+    </form>
+
+    <table border="1">
+    <tr>
+        <td>No</td>
+        <td>Nama</td>
+        <td>Username</td>
+        <td>Password</td>
+        <td>Level</td>
+        <td>Aksi</td>
+        <td>Aksi</td>
+    </tr>
+    <?php
+    include "koneksi.php";
+    if (isset($_POST['cari'])) {
+        $cari = $_POST['txt_cari'];
+        $query = mysqli_query($koneksi, "SELECT * FROM users WHERE nama like '%$cari%' OR username like '%$cari%'");
+    } else {
+        $query = mysqli_query($koneksi, "SELECT * FROM users");
+    }
+    $no = 1;
+    while ($data = mysqli_fetch_array($query)) {
+    ?>
+        <tr>
+            <td><?= $no ?></td>
+            <td><?= $data['nama'] ?></td>
+            <td><?= $data['username']?></td>
+            <td><?= $data['password']?></td>
+            <td><?= $data['level']?></td>
+            <td>
+                <a href="hapusdata.php?id=<?= $data['id'] ?>" 
+                    onclick="return confirm('Yakin menghapus <?= $data['username'] ?> ini?')">
+                    <button>Hapus</button>
+                </a>
+            </td>  
+            <td>
+                <a href="edit.php?id=<?= $data['id'] ?>">
+                    <button>Edit</button>
+                </a>
+            </td> 
+        </tr>
+        <?php
+        $no++;
+    }
+    ?>
+    </table>
+</body>
+</html>

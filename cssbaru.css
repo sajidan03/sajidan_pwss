@@ -1,0 +1,173 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* background-color: #f4f4f4; */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.atas {
+    padding: 15px;
+    text-align: center;
+    display: flex;
+}
+
+/* .atas form {
+    display: flex;
+}
+.atas .logout {
+    justify-content: end;
+} */
+form a,
+.atas form input[type="search"] {
+    padding: 10px;
+    font-size: 14px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+
+.atas form input[type="submit"] {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.atas form input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* Button Section */
+.btnatas {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+}
+
+.btnatas button {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    font-size: 14px;
+}
+
+.btnatas button:hover {
+    background-color: #5a6268;
+}
+.ttengah {
+    display: flex;
+    justify-content: center;
+}
+table {
+    width: 80%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background-color: whitesmoke;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px 20px;
+    text-align: center;
+}
+
+th {
+    background-color: #343a40;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tr:hover {
+    background-color: #e9ecef;
+}
+
+td a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+td a:hover {
+    color: #0056b3;
+}
+.atas {
+    display: flex;
+    justify-content: center;
+}
+.btntambah {
+    background-color: #007bff;
+    color: white;
+    margin-left: 10px;
+}
+.btntambah:active {
+    background-color: #004085;  /* Ubah warna saat tombol ditekan */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Efek shadow lebih kecil saat aktif (klik) */
+    transform: translateY(2px); /* Gerakkan tombol sedikit ke bawah saat diklik */
+}
+.btnedit {
+    color:black;
+}
+.btnedit:hover {
+    background-color: blue;
+    color:white;
+}
+button {
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+.hapus:hover {
+    background-color: red;
+    color: white;
+}
+button:hover {
+    background-color: #141414;
+    color: white;
+}
+
+button:active {
+    background-color: #004085;  /* Ubah warna saat tombol ditekan */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Efek shadow lebih kecil saat aktif (klik) */
+    transform: translateY(2px); /* Gerakkan tombol sedikit ke bawah saat diklik */
+}
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+.logout a {
+    display: flex;
+    justify-content: end;
+    margin-right: 50px;
+    background-color: black;
+    color: white;
+}

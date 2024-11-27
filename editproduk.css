@@ -1,0 +1,116 @@
+/* Global Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f3f7f9;
+    color: #444;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Form Container */
+form {
+    background-color: #ffffff;
+    width: 80%;
+    max-width: 500px;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+form:hover {
+    transform: scale(1.02);
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    margin-top: 10px;
+}
+
+td {
+    padding: 12px 8px;
+    font-size: 15px;
+    color: #666;
+}
+
+td:first-child {
+    text-align: right;
+    padding-right: 15px;
+}
+
+td input[type="text"],
+td input[type="number"],
+td input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: #f9fafb;
+    transition: border-color 0.2s ease;
+    outline: none;
+}
+
+td input[type="text"]:focus,
+td input[type="number"]:focus,
+td input[type="file"]:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 5px rgba(37, 99, 235, 0.2);
+}
+
+/* Image Preview */
+img {
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    width: 100px;
+    height: auto;
+}
+
+/* Submit Button Styling */
+input[type="submit"] {
+    background-color: #2563eb;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+    margin-top: 20px;
+}
+
+input[type="submit"]:hover {
+    background-color: #1e40af;
+    transform: translateY(-2px);
+}
+
+input[type="submit"]:active {
+    background-color: #1e3a8a;
+    transform: translateY(1px);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    form {
+        padding: 20px;
+        width: 90%;
+    }
+
+    td {
+        font-size: 14px;
+    }
+
+    input[type="submit"] {
+        font-size: 15px;
+        padding: 10px 15px;
+    }
+}

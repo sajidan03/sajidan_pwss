@@ -1,0 +1,247 @@
+/* style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: #141414;
+    color: #e0e0e0;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #1c1c1c;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #00d1b2;
+    margin-left: 200px;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin-right: 200px;
+}
+
+.navbar ul li a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+    color: #00d1b2;
+    text-decoration: underline;
+}
+
+.hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 60vh;
+    color: #ffffff;
+    background-image: url('img/god-of-war-ragnarok-complete-guide-featured.jpg'); /* Ganti dengan path gambar Anda */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.hero p {
+    margin-bottom: 20px;
+    font-weight: 100;
+}
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Overlay gelap */
+    z-index: 1;
+}
+.hero h2 {
+    margin-bottom: 10px;
+    color: #f4f4f4;
+    font-weight: 540;
+}
+.hero h2,
+.hero h1,
+.hero p,
+.hero .cta-button {
+    position: relative;
+    z-index: 2;
+}
+.hero .src input[type="search"],
+.hero .src input{
+    width: 360px;
+    height: 30px;
+}
+.hero {
+    .src {
+        z-index: 3;
+        justify-content: center;
+    }
+}
+.cta-button {
+    text-decoration: none;
+    padding: 5px 10px;
+    background-color: #00d1b2;
+    color: #141414;
+    font-size: 18px;
+    transition: background-color 0.3s;
+    font-size: medium;
+}
+
+.cta-button:hover {
+    background-color: #00a98f;
+}
+
+/* Featured Games */
+.featured {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.featured h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: #00d1b2;
+}
+
+.game-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.game-card:hover {
+    transform: translateY(-5px);
+}
+.game-card {
+    width: 280px;
+    background-color: #1c1c1c;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Menempatkan elemen dalam kolom dengan jarak antar elemen */
+    padding: 20px;
+}
+
+.game-info {
+    text-align: center;
+}
+
+.game-card img {
+    width: 100%;
+    height: auto;
+}
+
+.game-info h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.game-info p {
+    font-size: 16px;
+    color: #a0a0a0;
+}
+
+.game-card p {
+    font-size: 18px;
+    color: #00d1b2;
+    text-align: right;
+    margin-top: auto; /* Menempatkan teks harga di bagian bawah */
+}
+
+
+.game-info p {
+    font-size: 16px;
+    color: #a0a0a0;
+    margin-bottom: 20px;
+    text-align: start;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #00d1b2;
+    color: #141414;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #00a98f;
+}
+
+/* Footer */
+.footer {
+    background-color: #1c1c1c;
+    color: #e0e0e0;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-about, .footer-links, .footer-social {
+    max-width: 200px;
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links ul li a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.footer-links ul li a:hover {
+    color: #00d1b2;
+}
+
+.footer-social a img {
+    width: 32px;
+    height: 32px;
+    margin: 0 5px;
+    transition: transform 0.3s;
+}
+
+.footer-social a img:hover {
+    transform: scale(1.2);
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #a0a0a0;
+}

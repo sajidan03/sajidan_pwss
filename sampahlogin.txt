@@ -1,0 +1,35 @@
+.form {
+            justify-content: center;
+            display: flex;
+        }
+        .wrap form input[type="text"]{
+            padding: 10px;
+            text-decoration: none;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid black; /* Warna border bawah saat fokus */
+        }
+        .wrap form input:focus {
+            border-bottom: 2px solid black; /* Warna border bawah saat fokus */
+        }
+        .wrap form input[type="password"]:focus {
+            border-bottom: 2px solid black; /* Warna border bawah saat fokus */
+        }
+        .wrap form input[type="password"]{
+            padding: 10px;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid black; /* Warna border bawah saat fokus */
+        }
+        .wrap form td p {
+            margin-bottom: 4px;
+            margin-right: 6px;
+        }
+        .wrap input[type="submit"] {
+            padding: 8px 15px;
+            background-color: green;
+            color: white;
+            display: flex;
+            justify-content: end;
+            float: right;
+        }
