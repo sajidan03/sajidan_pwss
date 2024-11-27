@@ -14,7 +14,7 @@
     text-align: center;
     height: 60vh;
     color: #ffffff;
-    background-image: url('img/god-of-war-ragnarok-complete-guide-featured.jpg'); /* Ganti dengan path gambar Anda */
+    background-image: url('uploads/header.jpg'); /* Ganti dengan path gambar Anda */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -117,6 +117,7 @@
     font-size: 24px;
     margin-bottom: 10px;
     margin-top: 10px;
+    color: #f4f4f4;
 }
 
 .game-info p {
@@ -160,13 +161,13 @@
             <h2>Temukan game Action,horror, dan juga game PVP lainnya!</h2>
             <div class="src">
                 <p>Game termurah mulai dari Rp. 49.000,00</p>
-                <p>Login untuk mendapatkan akses untuk semua game!!`</p>
+                <p>Login untuk mendapatkan akses untuk semua game!!</p>
                 <!-- <input type="search" name="search" id="" placeholder="Cari game.."> 
                 <a href="#store" class="cta-button">Cari games</a> -->
             </div>
         </section>
         <section class="featured">
-            <h2>Featured Games</h2>
+            <h2>Popular Games</h2>
             <div class="game-grid">
                 <div class="game-card">
                     <img src="img/inn.jpg" alt="Game 1">

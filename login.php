@@ -34,9 +34,16 @@
     background: white;
     padding: 30px 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
     max-width: 400px;
     width: 100%;
+}
+.formm {
+    display: flex;
+    justify-content: center;
+}
+.content {
+    max-width: max-content;
 }
 .wrap {
     width: 100%;
@@ -63,6 +70,7 @@ td {
     border-bottom: 2px solid #ccc;
     font-size: 14px;
     transition: border-color 0.3s;
+    width: 260px;
 }
 
 .wrap form input[type="text"]:focus,
@@ -80,7 +88,7 @@ td {
     font-size: 16px;
     cursor: pointer;
     transition: background 0.3s ease;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .wrap form input[type="submit"]:hover {
@@ -97,9 +105,19 @@ td {
     margin-top: 70px;
 }
     </style>
+    <div class="formm">
     <div class="form">
         <div class="wrap">
         <form action="" method="post">
+            <div class="text">
+                <h1>Login <br></h1>
+                <h1 style="color: #090f71; margin-left: 10px;">riGo</h1>
+            </div>
+            <style>
+                .text {
+                    display: flex;
+                }
+            </style>
         <table>
             <tr>
                 <td><p>Username : </p></td>
@@ -115,6 +133,7 @@ td {
         </table>
     </form>
         </div>
+    </div>
     </div>
 </body>
 </html>
