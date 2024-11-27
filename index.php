@@ -200,6 +200,15 @@ session_start();
             case 'transaksi':
                 include 'transaksi.php';
                 break;
+                //
+            case 'tambahtrx':
+                include 'pembelian.php';
+                break;
+                //
+            case 'edittrx':
+                include 'edittrx.php';
+                break;
+            //
             default:
                 echo"Halaman tidak ditemukan";
                 break;
