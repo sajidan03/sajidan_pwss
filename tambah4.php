@@ -38,7 +38,7 @@
         $query_insert = mysqli_query($koneksi, "INSERT INTO member (nama_member, jenis_kelamin, no_hp, alamat) VALUES ('$nama_member', '$jenis_kelamin', '$no_hp', '$alamat')");
 
         if ($query_insert) {
-            header("location:member.php");
+            header("location:index.php?page=member");
         } else {
             echo "Gagal menambahkan data!";
         }

@@ -5,6 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Produk</title>
     <!-- <link rel="stylesheet" href="style2.css"> -->
+     <style>
+        form {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    width: 100%;
+    max-width: 400px;
+}
+.formm {
+    display: flex;
+    justify-content: center;
+}
+/* Label untuk form */
+label {
+    font-weight: bold;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+.content {
+    width: max-content;
+}
+/* Input teks dan dropdown */
+input[type="text"],
+input[type="number"],
+input[type="password"],
+select {
+    width: 360px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+/* Hover dan fokus pada input */
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+/* Tombol submit */
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+/* Hover tombol */
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Responsif */
+@media (max-width: 480px) {
+    form {
+        padding: 15px 20px;
+    }
+}
+     </style>
 </head>
 <body>
 <!-- 
@@ -62,7 +136,7 @@ include("koneksi.php");
 if (isset($_POST['tambah'])) {
     $nama_produk = mysqli_real_escape_string($koneksi, $_POST['nama_produk']);
     $harga = mysqli_real_escape_string($koneksi, $_POST['harga']);
-    $jml_produk = mysqli_real_escape_string($koneksi, $_POST['jml_produk']);
+    $jml_produk = mysqli_real_escape_string($koneksi, $_POST['deskripsi']);
     $idkategori = mysqli_real_escape_string($koneksi, $_POST['idkategori']);
     //
     $gambar = $_FILES['gambar']['name'];
@@ -72,7 +146,7 @@ if (isset($_POST['tambah'])) {
     if (in_array($type, $type_array)) {
         if ($size < 1000000) {
             if (move_uploaded_file($_FILES['gambar']['tmp_name'], 'uploads/'. $gambar)) {
-                $query_insert = mysqli_query($koneksi,"INSERT INTO produk (nama_produk, harga, jml_produk, gambar,idkategori) values ('$nama_produk', '$harga', '$jml_produk', '$gambar' ,'$idkategori')");
+                $query_insert = mysqli_query($koneksi,"INSERT INTO produk (nama_produk, harga, deskripsi, gambar,idkategori) values ('$nama_produk', '$harga', '$jml_produk', '$gambar' ,'$idkategori')");
                 if ($query_insert) {
                     header("location:index.php?page=produk");
                 }else {
@@ -89,26 +163,31 @@ if (isset($_POST['tambah'])) {
     }
 }
 ?>
+<style>
+    .judul p{
+        margin-right: 10px;
+    }
+</style>
     <form action="tambah5.php" method="post" enctype="multipart/form-data">
         <table>
             <tr>
-                <td>Nama Produk</td>
+                <td class="judul"> <p>Nama game : </p></td>
                 <td><input type="text" name="nama_produk" required></td>
             </tr>
             <tr>
-                <td>Harga</td>
+                <td class="judul"><p>Harga :</p> </td>
                 <td><input type="text" name="harga" required></td>
             </tr>
             <tr>
-                <td>Jumlah produk</td>
+                <td class="judul"><p>Deskripsi : </p></td>
                 <td><input type="text" name="jml_produk" required></td>
             </tr>
             <tr>
-                <td>Gambar</td>
+                <td class="judul"><p>Gambar : </p></td>
                 <td><input type="file" name="gambar" id="gambar" value=""></td>
             </tr>
             <tr>
-                <td>Id kategori</td>
+                <td class="judul"><p>Id kategori : </p></td>
                 <td><input type="number" name="idkategori" required></td>
             </tr>
             <tr>

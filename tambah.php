@@ -111,7 +111,7 @@ input[type="submit"]:hover {
         $query_insert = mysqli_query($koneksi, "INSERT INTO users (nama, username, password, level) VALUES ('$nama', '$username', '$pwenkripsi', '$level')");
 
         if ($query_insert) {
-            header("location:users.php");
+            header("location:index.php?page=user");
         } else {
             echo "Gagal menambahkan data!";
         }

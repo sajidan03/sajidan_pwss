@@ -24,7 +24,7 @@
         $keterangan = mysqli_real_escape_string($koneksi, $_POST['keterangan']);
         $query_insert = mysqli_query($koneksi, "INSERT INTO kategori_produk (nama_kategori, keterangan) VALUES ('$nama_kategori', '$keterangan')");
         if ($query_insert) {
-            header("location:kategori_produk.php");
+            header("location:index.php?page=kp");
         } else {
             echo "Gagal menambahkan data!";
         }

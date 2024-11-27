@@ -38,7 +38,7 @@
         $query_insert = mysqli_query($koneksi, "INSERT INTO penjualan (nama, username, password, level) VALUES ('$nama', '$username', '$password', '$level')");
 
         if ($query_insert) {
-            header("location:penjualan.php");
+            header("location:index.php?page=penjualan");
         } else {
             echo "Gagal menambahkan data!";
         }

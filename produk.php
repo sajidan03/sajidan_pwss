@@ -53,7 +53,7 @@ if (!isset($_SESSION["nama"])) {
             <td><?= $no ?></td>
             <td><?= $data['nama_produk'] ?></td>
             <td>Rp. <?= $data['harga']?></td>
-            <td><?= $data['jml_produk']?> pcs</td>
+            <td><?= $data['deskripsi']?> pcs</td>
             <td>
                 <?php 
                 if (!file_exists('uploads/'.$data['gambar']) || $data['gambar'] == "") {
