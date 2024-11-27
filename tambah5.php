@@ -165,7 +165,7 @@ if (isset($_POST['tambah'])) {
 ?>
 <style>
     .judul p{
-        margin-right: 10px;
+        margin-right: 6px;
     }
 </style>
     <form action="tambah5.php" method="post" enctype="multipart/form-data">
