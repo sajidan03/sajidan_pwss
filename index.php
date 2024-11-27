@@ -52,6 +52,7 @@ session_start();
                     <a href="index.php?page=member">Member</a>
                     <a href="index.php?page=penjualan">Penjualan</a>
                     <a href="index.php?page=kp">Kategori</a>
+                    <a href="index.php?page=transaksi">Transaksi</a>
                     <a href="logout.php">Logout</a> 
               </div>
               <?php   
@@ -196,6 +197,9 @@ session_start();
                 include 'edit2.php';
                 break;
             //
+            case 'transaksi':
+                include 'transaksi.php';
+                break;
             default:
                 echo"Halaman tidak ditemukan";
                 break;

@@ -115,6 +115,7 @@ td {
             </div>
             <style>
                 .text {
+                    font-size: 16px;
                     display: flex;
                 }
             </style>
