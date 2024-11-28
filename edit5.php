@@ -74,27 +74,27 @@ if (isset($_POST['edit'])) {
     <form action="edit5.php?idproduk=<?= $data['idproduk'] ?>" method="post" enctype="multipart/form-data">
         <table>
             <tr>
-                <td>Nama Produk</td>
+                <td>Nama Produk : </td>
                 <td><input type="text" name="nama_produk" value="<?= $data['nama_produk'] ?>"required></td>
             </tr>
             <tr>
-                <td>Harga</td>
+                <td>Harga : </td>
                 <td>
                     <input type="text" name="harga" id="" value="<?= $data['harga']?>">
                 </td>
             </tr>
             <tr>
-                <td>Jumlah produk</td>
-                <td><input type="number" name="jml_produk" id="" value="<?= $data['jml_produk']?>"></td>
+                <td>Deskripsi : </td>
+                <td><input type="text" name="deskripsi" value="<?= $data['deskripsi']?>"></td>
             </tr>
             <tr>
-                <td>Gambar</td>
+                <td>Gambar : </td>
                 <td><input type="file" name="gambar" id="gambar">
                 <br>
                 <img src="uploads/<?= $data['gambar'] ?>" alt="Gambar Produk" width="100"></td>
             </tr>
             <tr>
-                <td>Id kategori</td>
+                <td>Id kategori : `</td>
                 <td>
                     <input type="number" name="idkategori" id="" value="<?= $data['idkategori']?>">
                 </td>

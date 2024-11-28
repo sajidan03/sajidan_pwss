@@ -76,7 +76,7 @@ session_start();
             <div class="nava">
                 <a href="index.php?page=home" style="margin-left: 300px; background-color: #141414">Beranda</a>
                 <a href="index.php?page=login">Login</a>
-                <a href="index.php?page=tambahusers">Daftar</a>
+                <a href="index.php?page=daftar">Daftar</a>
             </div>
         </div>
         </div>
@@ -133,6 +133,10 @@ session_start();
             include 'member.php';
             break; 
             //
+            case 'index';
+            include'index.php';
+            break;
+            //
             case 'home':
                 include 'home.php';
                 break;
@@ -147,7 +151,7 @@ session_start();
                 if (file_exists('profil.php')) {
                     include'profil.php';
                 }else {
-                    
+                    echo"Halaman tidak ada";
                 }
                 break;
             //
@@ -209,6 +213,10 @@ session_start();
                 include 'edittrx.php';
                 break;
             //
+            case 'daftar':
+                include 'daftar.php';
+                break;
+            //
             default:
                 echo"Halaman tidak ditemukan";
                 break;
@@ -223,7 +231,6 @@ session_start();
             <?php
         }
         ?>
-        <!-- // include("login.php"); -->
     </div>
     </div>
 </body>

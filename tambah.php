@@ -99,19 +99,18 @@ input[type="submit"]:hover {
         <input type="submit" name="tambah" value="Daftar">
     </form></div>
     <?php
-    //
     include "koneksi.php";
     if (isset($_POST['tambah'])) {
         $nama = $_POST['nama'];
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $pwenkripsi  = sha1($password);
+        $pwenkripsi  = sha1($password); 
         $level = $_POST['level'];
 
         $query_insert = mysqli_query($koneksi, "INSERT INTO users (nama, username, password, level) VALUES ('$nama', '$username', '$pwenkripsi', '$level')");
-
         if ($query_insert) {
-            header("location:index.php?page=user");
+            header("location:index.php?page=index");
+            exit();
         } else {
             echo "Gagal menambahkan data!";
         }

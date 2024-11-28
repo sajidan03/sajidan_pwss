@@ -20,7 +20,7 @@
             $_SESSION['nama'] = $data['nama'];
             $_SESSION['id'] = $data['id'];
             $_SESSION['level'] = $data['level'];
-            header("location:index.php?page=user");
+            header("location:index.php?page=daftar");
         }else {
             echo"Login anda gagal";
         }

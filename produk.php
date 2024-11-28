@@ -31,7 +31,7 @@ if (!isset($_SESSION["nama"])) {
         <td>Id Game</td>
         <td>Nama game</td>
         <td>Harga</td>
-        <td>Jumlah Game</td>
+        <td>Deskripsi</td>
         <td>Foto Game</td>
         <td>Id Kategori</td>
         <td>Aksi</td>
