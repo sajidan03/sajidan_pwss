@@ -27,7 +27,7 @@ $data = mysqli_fetch_array($query);
 if (isset($_POST['edit'])) {
     $nama_produk = mysqli_real_escape_string($koneksi, $_POST['nama_produk']);
     $harga = mysqli_real_escape_string($koneksi, $_POST['harga']);
-    $jml_produk = mysqli_real_escape_string($koneksi, $_POST['jml_produk']);
+    $deskripsi = mysqli_real_escape_string($koneksi, $_POST['deskripsi']);
     $idkategori = mysqli_real_escape_string($koneksi, $_POST['idkategori']);
 
     // Cek apakah file gambar diunggah
@@ -45,7 +45,7 @@ if (isset($_POST['edit'])) {
             // Pindahkan file ke folder tujuan
             if (move_uploaded_file($_FILES["gambar"]["tmp_name"], $targetFilePath)) {
                 // Update gambar dengan path baru
-                $query_update = mysqli_query($koneksi, "UPDATE produk SET nama_produk='$nama_produk', harga='$harga', jml_produk='$jml_produk', gambar='$fileName', idkategori='$idkategori' WHERE idproduk='$id'");
+                $query_update = mysqli_query($koneksi, "UPDATE produk SET nama_produk='$nama_produk', harga='$harga', deskripsi='$deskripsi', gambar='$fileName', idkategori='$idkategori' WHERE idproduk='$id'");
 
                 if ($query_update) {
                     header("location:index.php?page=produk");
@@ -60,7 +60,7 @@ if (isset($_POST['edit'])) {
             echo "Hanya file JPG, JPEG, PNG, dan GIF yang diperbolehkan.";
         }
     } else {
-        $query_update = mysqli_query($koneksi, "UPDATE produk SET nama_produk='$nama_produk', harga='$harga', jml_produk='$jml_produk', idkategori='$idkategori' WHERE idproduk='$id'");
+        $query_update = mysqli_query($koneksi, "UPDATE produk SET nama_produk='$nama_produk', harga='$harga', deskripsi='$deskripsi', idkategori='$idkategori' WHERE idproduk='$id'");
         if ($query_update) {
             header("location:index.php?page=produk");
             exit;

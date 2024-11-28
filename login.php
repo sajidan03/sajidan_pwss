@@ -9,6 +9,18 @@
     <title>Document</title>
 </head>
 <body>
+    <script>
+        function validateForm() {
+            const username = document.forms["registerForm"]["username"].value;
+            const password = document.forms["registerForm"]["password"].value;
+            if (username == "" || password == "") {
+                alert("Semua kolom harus diisi!");
+                return false;
+            }
+            return true;
+        }
+    </script>
+    </script>
     <?php 
     if (isset($_POST["login"])) {
         include("koneksi.php");
@@ -20,9 +32,14 @@
             $_SESSION['nama'] = $data['nama'];
             $_SESSION['id'] = $data['id'];
             $_SESSION['level'] = $data['level'];
-            header("location:index.php?page=daftar");
+            header("location:index.php?page=user");
         }else {
-            echo"Login anda gagal";
+            // echo"Login anda gagal";
+            ?>
+            <script>
+                alert("Harap isi semua field!");
+            </script>
+            <?php
         }
     }
     ?>
@@ -106,7 +123,7 @@ td {
 }
     </style>
     <div class="formm">
-    <div class="form">
+    <div class="form" >
         <div class="wrap">
         <form action="" method="post">
             <div class="text">
@@ -120,17 +137,19 @@ td {
                 }
             </style>
         <table>
+            <form name="registerForm" action="" method="post" onsubmit="return validateForm()">
             <tr>
                 <td><p>Username : </p></td>
-                <td><input type="text" name="username" id=""></td>
+                <td><input type="text" name="username" id="" required></td>
             </tr>
             <tr>
                 <td><p>Password : </p></td>
-                <td><input type="password" name="password" id=""></td>
+                <td><input type="password" name="password" id="" required></td>
             </tr>
             <tr>
-                <td><input type="submit" value="Login" name="login"></td>
+                <td><input type="submit" value="Login" name="login" required></td>
             </tr>
+            </form>
         </table>
     </form>
         </div>

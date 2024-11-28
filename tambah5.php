@@ -180,7 +180,7 @@ if (isset($_POST['tambah'])) {
             </tr>
             <tr>
                 <td class="judul"><p>Deskripsi : </p></td>
-                <td><input type="text" name="jml_produk" required></td>
+                <td><input type="text" name="deskripsi" required></td>
             </tr>
             <tr>
                 <td class="judul"><p>Gambar : </p></td>

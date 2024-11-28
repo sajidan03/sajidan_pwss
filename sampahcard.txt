@@ -1,0 +1,16 @@
+<div class="game-card">
+                    <img src="img/sh.jpg" alt="Game 2">
+                    <div class="game-info">
+                        <h3>Silent Hill 2</h3>
+                        <p>Investigating a letter from his late wife, James returns to where they made so many memories - Silent Hill. What he finds is a ghost town, prowled by disturbing monsters and cloaked in deep fog. Confront the monsters, solve puzzles, and search for traces of your wife in this remake of SILENT HILL 2.</p>                      
+                    </div>
+                    <p>Rp. 982.000,00</p>
+                </div>
+                <div class="game-card">
+                    <img src="img/aqp.jpg" alt="">
+                    <div class="game-info">
+                        <h3>A Quiet place : Road ahead</h3>
+                         <p>The Road Ahead is a single-player horror adventure game inspired by the critically acclaimed blockbuster movie franchise</p>
+                    </div>
+                    <p>Rp. 387.000,00</p>
+                </div>

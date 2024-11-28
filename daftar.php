@@ -116,6 +116,7 @@
             if (empty($nama) || empty($username) || empty($password) || empty($level)) {
                 echo "Isi terlebih dahulu";
             } else {
+
                 ?>
                 <script>
                     alert("Daftar berhasil");

@@ -155,6 +155,11 @@
 }
     </style>
 </head>
+<?php
+    include "koneksi.php";
+    $query = mysqli_query($koneksi, "SELECT * FROM produk");
+    $no = 1;
+    ?>
 <body>
     <main>
         <section class="hero">
@@ -169,56 +174,20 @@
         <section class="featured">
             <h2>Popular Games</h2>
             <div class="game-grid">
-                <div class="game-card">
-                    <img src="img/inn.jpg" alt="Game 1">
+            <?php while ($data = mysqli_fetch_assoc($query)) { ?>
+                <div class="game-card" onclick="window.location.href='index.php?page=content&idproduk=<?= $data['idproduk'] ?>'">
+                    <?php
+                    $foto = (file_exists('uploads/' . $data['gambar']) && $data['gambar'] != "") ? $data['gambar'] : "default.jpg";
+                    ?>
+                    <img src="uploads/<?= $foto ?>" alt="Gambar Produk">
                     <div class="game-info">
-                        <h3>The Inn-Sanity</h3>
-                        <p>A thrilling adventure awaits...</p>
+                        <h3><?= htmlspecialchars($data['nama_produk']) ?></h3>
+                        <p><?= htmlspecialchars($data['deskripsi']) ?></p>
                     </div>
-                    <p style="justify-content: end; align-items: end;">Rp. 72.000,00</p>
+                    <p>Rp. <?= number_format($data['harga'], 0, ',', '.') ?> </p>
                 </div>
-                <div class="game-card">
-                    <img src="img/sh.jpg" alt="Game 2">
-                    <div class="game-info">
-                        <h3>Silent Hill 2</h3>
-                        <p>Investigating a letter from his late wife, James returns to where they made so many memories - Silent Hill. What he finds is a ghost town, prowled by disturbing monsters and cloaked in deep fog. Confront the monsters, solve puzzles, and search for traces of your wife in this remake of SILENT HILL 2.</p>                      
-                    </div>
-                    <p>Rp. 982.000,00</p>
-                </div>
-                <div class="game-card">
-                    <img src="img/aqp.jpg" alt="">
-                    <div class="game-info">
-                        <h3>A Quiet place : Road ahead</h3>
-                         <p>The Road Ahead is a single-player horror adventure game inspired by the critically acclaimed blockbuster movie franchise</p>
-                    </div>
-                    <p>Rp. 387.000,00</p>
-                </div>
+                <?php } ?>
                 <div class="game-grid">
-                    <div class="game-card">
-                        <img src="img/re4.jpg" alt="Game 1">
-                        <div class="game-info">
-                            <h3>Resident Evil 4</h3>
-                            <p>A thrilling adventure awaits...</p>
-                        </div>
-                        <p>Rp. 387.000,00</p>
-                    </div>
-                    <div class="game-card">
-                        <img src="img/outlast2.jpg" alt="Game 2">
-                        <div class="game-info">
-                            <h3>Outlast 2</h3>
-                            <p>
-                                Outlast 2 is the sequel to the acclaimed survival horror game Outlast. Set in the same universe as the first game, but with different characters and a different setting, Outlast 2 is a twisted new journey into the depths of the human mind and its dark secrets.
-                            </p>
-                        </div>
-                        <p>Rp. 387.000,00</p>
-                    </div>
-                    <div class="game-card">
-                        <img src="img/aqp.jpg" alt="Game 3">
-                        <div class="game-info">
-                            <h3>A Quiet place : Road ahead</h3>
-                            <p>The Road Ahead is a single-player horror adventure game inspired by the critically acclaimed blockbuster movie franchise</p>
-                        </div>
-                        <p>Rp. 387.000,00</p>
                     </div>
             </div>
         </section>

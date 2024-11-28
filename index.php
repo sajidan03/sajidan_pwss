@@ -217,6 +217,10 @@ session_start();
                 include 'daftar.php';
                 break;
             //
+            case 'content':
+                include 'content.php';
+                break;
+            //
             default:
                 echo"Halaman tidak ditemukan";
                 break;
