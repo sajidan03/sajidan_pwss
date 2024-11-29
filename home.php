@@ -93,7 +93,7 @@
 }
 .game-card {
     width: 280px;
-    background-color: #1c1c1c;
+    background-color: #090f71;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     overflow: hidden;
@@ -122,7 +122,8 @@
 
 .game-info p {
     font-size: 16px;
-    color: #a0a0a0;
+    /* color: #a0a0a0; */
+    color: white;
 }
 
 .game-card p {
@@ -135,7 +136,7 @@
 
 .game-info p {
     font-size: 16px;
-    color: #a0a0a0;
+    color: white;
     margin-bottom: 20px;
     text-align: start;
 }
