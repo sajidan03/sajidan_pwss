@@ -77,6 +77,9 @@ input[type="submit"]:hover {
         padding: 15px 20px;
     }
 }
+.content {
+    background-color: #ffffff;
+}
      </style>
 </head>
 <body>

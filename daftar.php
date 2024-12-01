@@ -65,6 +65,9 @@
                 padding: 15px 20px;
             }
         }
+        .content {
+            background-color: #ffffff;
+        }
     </style>
     <script>
         function validateForm() {

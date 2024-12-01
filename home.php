@@ -23,6 +23,9 @@
     margin-bottom: 20px;
     font-weight: 100;
 }
+.hero img {
+    border-radius: 6px;
+}
 .hero::before {
     content: "";
     position: absolute;
@@ -79,7 +82,7 @@
 .featured h2 {
     font-size: 32px;
     margin-bottom: 40px;
-    color: #090f71;
+    color: lightblue;
 }
 
 .game-grid {
@@ -93,7 +96,7 @@
 }
 .game-card {
     width: 280px;
-    background-color: #090f71;
+    background-color: darkcyan;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     overflow: hidden;

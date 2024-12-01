@@ -128,6 +128,7 @@ td {
 }
 .content {
     margin-top: 70px;
+    background-color: #ffffff;
 }
     </style>
     <div class="formm">
