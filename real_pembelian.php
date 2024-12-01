@@ -1,31 +1,40 @@
 <?php
-if (isset($_GET['gambar'])) {
-    $gambar = urldecode($_GET['gambar']);
+// Koneksi ke database
+include "koneksi.php";
+
+// Ambil nama game dari parameter URL
+if (isset($_GET['game'])) {
+    $game = urldecode($_GET['game']);
 } else {
-    $gambar = "default.jpg"; // Default gambar jika tidak ada parameter
+    // Jika tidak ada game, arahkan ke halaman utama
+    header('Location: index.php');
+    exit;
 }
 
-// Cek apakah gambar ada di database
-include "koneksi.php";
-$query = mysqli_query($koneksi, "SELECT * FROM produk WHERE nama_produk = '" . mysqli_real_escape_string($koneksi, $gambar) . "'");
+// Ambil data produk dari database berdasarkan nama game
+$query = mysqli_query($koneksi, "SELECT * FROM produk WHERE nama_produk = '" . mysqli_real_escape_string($koneksi, $game) . "'");
 $data = mysqli_fetch_assoc($query);
 
 if (!$data) {
-    // Jika tidak ditemukan, gunakan gambar default
-    $data['gambar'] = "default.jpg";
-    $data['nama_produk'] = "Produk Tidak Ditemukan";
-    $data['deskripsi'] = "Deskripsi tidak tersedia.";
-    $data['harga'] = 0;
+    // Jika tidak ditemukan, arahkan ke halaman utama atau tampilkan pesan error
+    header('Location: index.php');
+    exit;
 }
+
+// Harga game dan informasi lainnya
+$harga = number_format($data['harga'], 0, ',', '.');
+$deskripsi = htmlspecialchars($data['deskripsi']);
+$gambar = htmlspecialchars($data['gambar']);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Game</title>
+    <title>Transaksi Pembelian <?= htmlspecialchars($data['nama_produk']) ?></title>
     <style>
+        /* CSS yang digunakan sama seperti sebelumnya */
         body {
             font-family: Arial, sans-serif;
             background-color: #1b2838;
@@ -62,7 +71,6 @@ if (!$data) {
             max-width: 500px;
             width: 100%;
             border-radius: 10px;
-            /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); */
         }
 
         .game-info {
@@ -92,7 +100,7 @@ if (!$data) {
             margin: 20px 0;
         }
 
-        .buy-button {
+        .payment-option {
             text-decoration: none;
             padding: 12px 30px;
             background-color: #5c7e10;
@@ -100,9 +108,10 @@ if (!$data) {
             font-size: 18px;
             border-radius: 5px;
             transition: background-color 0.3s;
+            margin: 10px 0;
         }
 
-        .buy-button:hover {
+        .payment-option:hover {
             background-color: #7ab620;
         }
 
@@ -126,17 +135,19 @@ if (!$data) {
     <div class="tengahv">
         <div class="content">
             <div class="game-header">
-                <img src="uploads/<?= htmlspecialchars($data['gambar']) ?>" alt="<?= htmlspecialchars($data['nama_produk']) ?>">
+                <img src="uploads/<?= $gambar ?>" alt="<?= htmlspecialchars($data['nama_produk']) ?>">
                 <div class="game-info">
                     <h1><?= htmlspecialchars($data['nama_produk']) ?></h1>
-                    <p><?= htmlspecialchars($data['deskripsi']) ?></p>
-                    <p class="price">Rp. <?= number_format($data['harga'], 0, ',', '.') ?></p>
-                    <a href="index.php?page=pembelian&game=<?= urlencode($data['nama_produk']) ?>" class="buy-button">Beli Sekarang</a>
+                    <p><?= $deskripsi ?></p>
+                    <p class="price">Rp. <?= $harga ?></p>
                 </div>
             </div>
+            <h2>Pilih Metode Pembayaran</h2>
+            <a href="payment.php?game=<?= urlencode($data['nama_produk']) ?>&payment=DANA" class="payment-option">Bayar dengan DANA</a>
+            <a href="payment.php?game=<?= urlencode($data['nama_produk']) ?>&payment=WhatsApp" class="payment-option">Chat WhatsApp untuk Pembayaran</a>
             <div class="additional-info">
                 <h2>Detail Game</h2>
-                <p><?= $data['deskripsi']?></p>
+                <p><?= $deskripsi ?></p>
             </div>
         </div>
     </div>

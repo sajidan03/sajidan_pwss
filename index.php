@@ -247,6 +247,10 @@ session_start();
                 include 'tabuser.php';
                 break;
             //
+            case 'pembelian':
+                include 'real_pembelian.php';
+                break;
+            //
             default:
                 echo"Halaman tidak ditemukan";
                 break;

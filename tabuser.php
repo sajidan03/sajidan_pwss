@@ -1,197 +1,144 @@
+<?php
+if (isset($_GET['gambar'])) {
+    $gambar = urldecode($_GET['gambar']);
+} else {
+    $gambar = "default.jpg"; // Default gambar jika tidak ada parameter
+}
+
+// Cek apakah gambar ada di database
+include "koneksi.php";
+$query = mysqli_query($koneksi, "SELECT * FROM produk WHERE nama_produk = '" . mysqli_real_escape_string($koneksi, $gambar) . "'");
+$data = mysqli_fetch_assoc($query);
+
+if (!$data) {
+    // Jika tidak ditemukan, gunakan gambar default
+    $data['gambar'] = "default.jpg";
+    $data['nama_produk'] = "Produk Tidak Ditemukan";
+    $data['deskripsi'] = "Deskripsi tidak tersedia.";
+    $data['harga'] = 0;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Detail Game</title>
     <style>
-        .hero {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 60vh;
-    color: #ffffff;
-    background-image: url('uploads/header.jpg'); /* Ganti dengan path gambar Anda */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-.hero p {
-    margin-bottom: 20px;
-    font-weight: 100;
-}
-.hero::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Overlay gelap */
-    z-index: 1;
-}
-.hero h2 {
-    margin-bottom: 10px;
-    color: #f4f4f4;
-    font-weight: 540;
-}
-.hero h2,
-.hero h1,
-.hero p,
-.hero .cta-button {
-    position: relative;
-    z-index: 2;
-}
-.hero .src input[type="search"],
-.hero .src input{
-    width: 360px;
-    height: 30px;
-}
-.hero {
-    .src {
-        z-index: 3;
-        justify-content: center;
-    }
-}
-.cta-button {
-    text-decoration: none;
-    padding: 5px 10px;
-    background-color: #00d1b2;
-    color: #141414;
-    font-size: 18px;
-    transition: background-color 0.3s;
-    font-size: medium;
-}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1b2838;
+            color: #c7d5e0;
+            margin: 0;
+            padding: 0;
+        }
+        .tengahv {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .content {
+            display: grid;
+            place-items: center;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #27496d ;
+        }
 
-.cta-button:hover {
-    background-color: #00a98f;
-}
+        .game-header {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
 
-/* Featured Games */
-.featured {
-    padding: 60px 20px;
-    text-align: center;
-}
+        .game-header img {
+            max-width: 500px;
+            width: 100%;
+            border-radius: 10px;
+            /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); */
+        }
 
-.featured h2 {
-    font-size: 32px;
-    margin-bottom: 40px;
-    color: #090f71;
-}
+        .game-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-.game-grid {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-.game-card:hover {
-    transform: translateY(-5px);
-}
-.game-card {
-    width: 280px;
-    background-color: #090f71;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-    transition: transform 0.3s;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Menempatkan elemen dalam kolom dengan jarak antar elemen */
-    padding: 20px;
-}
+        .game-info h1 {
+            font-size: 36px;
+            margin: 0 0 20px;
+            color: #ffffff;
+        }
 
-.game-info {
-    text-align: center;
-}
+        .game-info p {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #c7d5e0;
+            line-height: 1.5;
+        }
 
-.game-card img {
-    width: 100%;
-    height: auto;
-}
+        .game-info .price {
+            font-size: 28px;
+            color: #66c0f4;
+            font-weight: bold;
+            margin: 20px 0;
+        }
 
-.game-info h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    color: #f4f4f4;
-}
+        .buy-button {
+            text-decoration: none;
+            padding: 12px 30px;
+            background-color: #5c7e10;
+            color: #ffffff;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
 
-.game-info p {
-    font-size: 16px;
-    /* color: #a0a0a0; */
-    color: white;
-}
+        .buy-button:hover {
+            background-color: #7ab620;
+        }
 
-.game-card p {
-    font-size: 18px;
-    color: #6495ed;
-    text-align: right;
-    margin-top: auto; /* Menempatkan teks harga di bagian bawah */
-}
+        .additional-info {
+            margin-top: 40px;
+            text-align: center;
+        }
 
+        .additional-info h2 {
+            color: #ffffff;
+            font-size: 24px;
+        }
 
-.game-info p {
-    font-size: 16px;
-    color: white;
-    margin-bottom: 20px;
-    text-align: start;
-}
-
-.btn {
-    text-decoration: none;
-    padding: 10px 20px;
-    background-color: #00d1b2;
-    color: #141414;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: background-color 0.3s;
-}
-
-.btn:hover {
-    background-color: #00a98f;
-}
+        .additional-info p {
+            font-size: 16px;
+            color: #c7d5e0;
+        }
     </style>
 </head>
-<?php
-    include "koneksi.php";
-    $query = mysqli_query($koneksi, "SELECT * FROM produk");
-    $no = 1;
-    ?>
 <body>
-    <main>
-        <section class="hero">
-            <h2>Temukan game Action,horror, dan juga game PVP lainnya!</h2>
-            <div class="src">
-                <p>Game termurah mulai dari Rp. 49.000,00</p>
-                <p>Login untuk mendapatkan akses untuk semua game!!</p>
-                <!-- <input type="search" name="search" id="" placeholder="Cari game.."> 
-                <a href="#store" class="cta-button">Cari games</a> -->
-            </div>
-        </section>
-        <section class="featured">
-            <h2>Popular Games</h2>
-            <div class="game-grid">
-            <?php while ($data = mysqli_fetch_assoc($query)) { ?>
-                <div class="game-card" onclick="window.location.href='index.php?page=content&gambar=<?= urlencode($data['nama_produk']) ?>'">
-                    <?php
-                    $foto = (file_exists('uploads/' . $data['gambar']) && $data['gambar'] != "") ? $data['gambar'] : "default.jpg";
-                    ?>
-                    <img src="uploads/<?= $foto ?>" alt="Gambar Produk">
-                    <div class="game-info">
-                        <h3><?= htmlspecialchars($data['nama_produk']) ?></h3>
-                        <p><?= htmlspecialchars($data['deskripsi']) ?></p>
-                    </div>
-                    <p>Rp. <?= number_format($data['harga'], 0, ',', '.') ?> </p>
+    <div class="tengahv">
+        <div class="content">
+            <div class="game-header">
+                <img src="uploads/<?= htmlspecialchars($data['gambar']) ?>" alt="<?= htmlspecialchars($data['nama_produk']) ?>">
+                <div class="game-info">
+                    <h1><?= htmlspecialchars($data['nama_produk']) ?></h1>
+                    <p><?= htmlspecialchars($data['deskripsi']) ?></p>
+                    <p class="price">Rp. <?= number_format($data['harga'], 0, ',', '.') ?></p>
+                    <a href="index.php?page=pembelian&game=<?= urlencode($data['nama_produk']) ?>" class="buy-button">Beli Sekarang</a>
                 </div>
-                <?php } ?>
-                <div class="game-grid">
-                    </div>
             </div>
-        </section>
-    </main>
+            <div class="additional-info">
+                <h2>Detail Game</h2>
+                <p><?= $data['deskripsi']?></p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -36,7 +36,7 @@
                 header("location:index.php?page=user");
                 exit();
             } elseif ($data['level'] == "user") {
-                header("location:index.php?page=tabuser");
+                header("location:index.php");
                 exit();
             } else {
                 echo "<script>alert('Level pengguna tidak valid!');</script>";
