@@ -1,42 +1,136 @@
 <?php
-// Mengambil parameter 'card' dari URL
-$card = isset($_GET['card']) ? $_GET['card'] : 'default';  // Default jika tidak ada parameter
+if (isset($_GET['gambar'])) {
+    $gambar = urldecode($_GET['gambar']);
+} else {
+    $gambar = "default.jpg"; // Default gambar jika tidak ada parameter
+}
 
-// Tentukan konten yang sesuai dengan parameter card
-switch ($card) {
-    case 'sajidan':
-        $image = 'sajidan.jpg';  // Gambar untuk Sajidan
-        $content = 'Ini adalah konten Sajidan.';
-        break;
+// Cek apakah gambar ada di database
+include "koneksi.php";
+$query = mysqli_query($koneksi, "SELECT * FROM produk WHERE nama_produk = '" . mysqli_real_escape_string($koneksi, $gambar) . "'");
+$data = mysqli_fetch_assoc($query);
 
-    case 'hanif':
-        $image = 'hanif.jpg';  // Gambar untuk Hanif
-        $content = 'Ini adalah konten Hanif.';
-        break;
-
-    case 'lain':
-        $image = 'lain.jpg';  // Gambar untuk konten lain
-        $content = 'Ini adalah konten lainnya.';
-        break;
-
-    default:
-        $image = 'default.jpg';  // Gambar default jika card tidak dikenali
-        $content = 'Pilih card untuk melihat kontennya.';
-        break;
+if (!$data) {
+    // Jika tidak ditemukan, gunakan gambar default
+    $data['gambar'] = "default.jpg";
+    $data['nama_produk'] = "Produk Tidak Ditemukan";
+    $data['deskripsi'] = "Deskripsi tidak tersedia.";
+    $data['harga'] = 0;
 }
 ?>
+
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Konten Card</title>
+    <title>Detail Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1b2838;
+            color: #c7d5e0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #27496d ;
+        }
+
+        .game-header {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        .game-header img {
+            max-width: 500px;
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .game-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .game-info h1 {
+            font-size: 36px;
+            margin: 0 0 20px;
+            color: #ffffff;
+        }
+
+        .game-info p {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #c7d5e0;
+            line-height: 1.5;
+        }
+
+        .game-info .price {
+            font-size: 28px;
+            color: #66c0f4;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .buy-button {
+            text-decoration: none;
+            padding: 12px 30px;
+            background-color: #5c7e10;
+            color: #ffffff;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .buy-button:hover {
+            background-color: #7ab620;
+        }
+
+        .additional-info {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .additional-info h2 {
+            color: #ffffff;
+            font-size: 24px;
+        }
+
+        .additional-info p {
+            font-size: 16px;
+            color: #c7d5e0;
+        }
+    </style>
 </head>
 <body>
-
-<!-- Menampilkan Konten Dinamis Berdasarkan Parameter Card -->
-<h2>Konten: <?php echo $content; ?></h2>
-<img src="uploads/<?php echo $image; ?>" alt="Gambar Konten" width="300" height="200">
-
+    <div class="content">
+        <div class="game-header">
+            <img src="uploads/<?= htmlspecialchars($data['gambar']) ?>" alt="<?= htmlspecialchars($data['nama_produk']) ?>">
+            <div class="game-info">
+                <h1><?= htmlspecialchars($data['nama_produk']) ?></h1>
+                <p><?= htmlspecialchars($data['deskripsi']) ?></p>
+                <p class="price">Rp. <?= number_format($data['harga'], 0, ',', '.') ?></p>
+                <a href="checkout.php?game=<?= urlencode($data['nama_produk']) ?>" class="buy-button">Beli Sekarang</a>
+            </div>
+        </div>
+        <div class="additional-info">
+            <h2>Detail Game</h2>
+            <p>Temukan pengalaman bermain terbaik dengan game ini! Jelajahi berbagai fitur menarik dan alur cerita yang mendalam.</p>
+        </div>
+    </div>
 </body>
 </html>

@@ -32,7 +32,15 @@
             $_SESSION['nama'] = $data['nama'];
             $_SESSION['id'] = $data['id'];
             $_SESSION['level'] = $data['level'];
-            header("location:index.php?page=user");
+            if ($data['level'] == "admin") {
+                header("location:index.php?page=user");
+                exit();
+            } elseif ($data['level'] == "user") {
+                header("location:index.php?page=tabuser");
+                exit();
+            } else {
+                echo "<script>alert('Level pengguna tidak valid!');</script>";
+            }
         }else {
             // echo"Login anda gagal";
             ?>

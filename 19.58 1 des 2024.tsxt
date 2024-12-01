@@ -1,0 +1,17 @@
+<div class="game-grid">
+            <?php while ($data = mysqli_fetch_assoc($query)) { ?>
+                <div class="game-card" onclick="window.location.href='index.php?page=content&idproduk=<?= $data['idproduk'] ?>'">
+                    <?php
+                    $foto = (file_exists('uploads/' . $data['gambar']) && $data['gambar'] != "") ? $data['gambar'] : "default.jpg";
+                    ?>
+                    <img src="uploads/<?= $foto ?>" alt="Gambar Produk">
+                    <div class="game-info">
+                        <h3><?= htmlspecialchars($data['nama_produk']) ?></h3>
+                        <p><?= htmlspecialchars($data['deskripsi']) ?></p>
+                    </div>
+                    <p>Rp. <?= number_format($data['harga'], 0, ',', '.') ?> </p>
+                </div>
+                <?php } ?>
+                <div class="game-grid">
+                    </div>
+            </div>

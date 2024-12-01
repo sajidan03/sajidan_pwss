@@ -65,9 +65,15 @@ session_start();
                 ?>
                 <div class="navbar">
                 <p style="color: #6495ed;">riGo</p>
-                    <a href="index.php?page=user">User</a>
-                    <a href="logout.php">Logout</a>
+                    <div class="kanan">
+                        <a href="logout.php">Logout</a>
+                    </div>
                 </div>
+                <style>
+                    .navbar .kanan {
+                        margin-right: 50px;
+                    }
+                </style>
                 <?php
             }
         ?>
@@ -235,6 +241,10 @@ session_start();
             //
             case 'content':
                 include 'content.php';
+                break;
+            //
+            case 'tabuser':
+                include 'tabuser.php';
                 break;
             //
             default:
