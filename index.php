@@ -46,7 +46,10 @@ session_start();
             if ($_SESSION['level'] == 'admin') {
               ?>
               <div class="navbar">
-                <p style="color: #6495ed;">riGo</p>
+                <div class="kiri">
+                    <p style="color: #6495ed;">riGo</p>
+                </div>
+                <div class="kanan">
                     <a href="index.php?page=user">User</a>
                     <a href="index.php?page=produk">Produk</a>
                     <a href="index.php?page=member">Member</a>
@@ -54,6 +57,7 @@ session_start();
                     <a href="index.php?page=kp">Kategori</a>
                     <a href="index.php?page=transaksi">Transaksi</a>
                     <a href="logout.php">Logout</a> 
+                </div>
               </div>
               <?php   
             }
@@ -74,43 +78,55 @@ session_start();
         <div class="anav">
             <p style="color: #6495ed;">riGo</p>
             <div class="nava">
-                <a href="index.php?page=home" style="margin-left: 300px; background-color: #141414">Beranda</a>
+                <a href="index.php?page=home" style="background-color: #141414">Beranda</a>
                 <a href="index.php?page=login">Login</a>
-                <a href="index.php?page=daftar">Daftar</a>
+                <a href="index.php?page=daftar" style="margin-right: 40px;">Daftar</a>
             </div>
         </div>
         </div>
         <style>
-            .anav {
-                background-color: #141414; 
-                 padding: 10px 20px;
-                 display: flex;
-                 align-items: center;
-                 /* justify-content: space-between; */
-                box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-            }
-            .anav p{
-                color: #6495ed; 
-                font-size: 24px;
-               font-weight: bold;
-               margin: 0;
-              margin-right: 740px;
-            }
-            .nava a{
-                color: #ffffff; /* Warna teks tautan */
-               text-decoration: none;
-               padding: 6px 12px;
-                border-radius: 1px;
-               transition: all 0.1s ease;
-               font-size: 14px;
-               background-color: green;
-            }
-            .nava a:hover{
-                /* Warna latar tautan saat hover */
-    /* color: #141414; Warna teks saat hover */
-                 color: whitesmoke;
-                   text-decoration: underline;
-            }
+            /* Navbar styling */
+.anav {
+    background-color: #141414;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+/* Logo styling */
+.anav p {
+    color: #6495ed;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Navbar links styling */
+.nava a {
+    color: #ffffff; /* Warna teks tautan */
+    text-decoration: none;
+    padding: 8px 16px; /* Menyesuaikan padding untuk elemen yang lebih rapi */
+    transition: all 0.2s ease;
+    font-size: 14px;
+    background-color: green;
+}
+/* Hover effect for navbar links */
+.nava a:hover {
+    color: lightsteelblue;
+    text-decoration: underline;
+}
+.contentt {
+    display: flex;
+    justify-content: center;
+}
+
         </style>
         <?php
         }

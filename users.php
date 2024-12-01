@@ -11,6 +11,7 @@ if (!isset($_SESSION["nama"])) {
     <title>Sajidan</title>
     <!-- <link rel="stylesheet" href="style.css"> -->
      <link rel="stylesheet" href="cssbaru.css">
+     <link rel="stylesheet" href="index.css">
 </head>
 <style>
     .logout {

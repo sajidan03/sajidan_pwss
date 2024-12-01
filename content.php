@@ -36,7 +36,7 @@ switch ($card) {
 
 <!-- Menampilkan Konten Dinamis Berdasarkan Parameter Card -->
 <h2>Konten: <?php echo $content; ?></h2>
-<img src="images/<?php echo $image; ?>" alt="Gambar Konten" width="300" height="200">
+<img src="uploads/<?php echo $image; ?>" alt="Gambar Konten" width="300" height="200">
 
 </body>
 </html>
