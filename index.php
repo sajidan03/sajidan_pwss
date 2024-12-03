@@ -251,6 +251,10 @@ session_start();
                 include 'real_pembelian.php';
                 break;
             //
+            case 'beli':
+                include'beli.php';
+                break;
+            //
             default:
                 echo"Halaman tidak ditemukan";
                 break;

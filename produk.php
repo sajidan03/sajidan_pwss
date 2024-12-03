@@ -36,6 +36,7 @@ if (!isset($_SESSION["nama"])) {
         <td>Id Kategori</td>
         <td>Aksi</td>
         <td>Aksi</td>
+        <td>Keterangan</td>
     </tr>
     </div>
     <?php
@@ -84,6 +85,7 @@ if (!isset($_SESSION["nama"])) {
                     <button class="btnedit">Edit</button>
                 </a>
             </td> 
+            <td><?= $data['']?></td>
         </tr>
         <?php
         $no++;

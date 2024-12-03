@@ -153,7 +153,21 @@ td {
             </tr>
             <tr>
                 <td><p>Password : </p></td>
-                <td><input type="password" name="password" id="" required></td>
+                <td><input type="password" name="password" id="pwd" required></td>
+                <td><input type="checkbox" name="checkbox" id="chk" class="mata"></td>
+                <script>
+                    const pwd = document.getElementById("pwd");
+                    const chk = document.getElementById("chk");
+                    chk.onchange = function(e) {
+                        pwd.type = chk.checked ? "text" : "password";
+                    };
+                </script>
+                <style>
+                    .mata {
+                        background: url('eye-open-icon.png') 
+                        no-repeat center/cover;
+                    }
+                </style>
             </tr>
             <tr>
                 <td><input type="submit" value="Login" name="login" required></td>
