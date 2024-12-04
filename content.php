@@ -131,7 +131,7 @@ if (!$data) {
                     <h1><?= htmlspecialchars($data['nama_produk']) ?></h1>
                     <p><?= htmlspecialchars($data['deskripsi']) ?></p>
                     <p class="price">Rp. <?= number_format($data['harga'], 0, ',', '.') ?></p>
-                    <a href="index.php?page=pembelian&game=<?= urlencode($data['nama_produk']) ?>" class="buy-button">Beli Sekarang</a>
+                    <a href="index.php?page=beli&game=<?= urlencode($data['nama_produk']) ?>" class="buy-button">Beli Sekarang</a>
                 </div>
             </div>
             <div class="additional-info">

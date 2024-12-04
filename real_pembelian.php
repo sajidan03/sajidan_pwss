@@ -1,7 +1,5 @@
 <?php
-// Koneksi ke database
 include "koneksi.php";
-
 // Ambil nama game dari parameter URL
 if (isset($_GET['game'])) {
     $game = urldecode($_GET['game']);
