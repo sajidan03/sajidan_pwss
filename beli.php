@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       background-color: #f4f4f9;
     }
     .container {
-      max-width: 800px;
+      max-width: 500px;
       margin: 50px auto;
       background: #fff;
       padding: 20px;
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     input[type="text"],
     input[type="tel"],
     input[type="date"] {
-      width: 740px;
+      width: 100%;
       padding: 10px;
       font-size: 16px;
       border: 1px solid #ddd;
@@ -97,55 +97,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </style>
 </head>
 <body>
-  <style>
-    .bungkus {
-      display: flex;
-      justify-content: center;
-    }
-  </style>
   <div class="container">
     <h2>Form Transaksi</h2>
+
     <!-- Tampilkan pesan jika ada -->
     <?php if (!empty($message)): ?>
       <div class="message"><?php echo htmlspecialchars($message); ?></div>
     <?php endif; ?>
+
     <!-- Form transaksi -->
-     <div class="bungkus">
-     <form action="" method="POST">
+    <form action="" method="POST">
       <!-- Nama -->
-        <div class="form-group">
-          <label for="nama">Nama</label>
-          <input type="text" id="nama" name="nama" placeholder="Masukkan Nama" required>
-        </div>
-        
-        <!-- No HP -->
-        <div class="form-group">
-          <label for="no_hp">No HP</label>
-          <input type="tel" id="no_hp" name="no_hp" placeholder="Masukkan No HP" required>
-        </div>
-        
-        <!-- Tanggal Transaksi -->
-        <div class="form-group">
-          <label for="tanggal">Tanggal Transaksi</label>
-          <input type="text" id="tanggal" name="tanggal" value="<?php echo date('Y-m-d'); ?>" readonly>
-        </div>
-  
-        <!-- Submit -->
-         <div class="metod">
-         <input type="submit" value="Dana" style="width: 100px;">
-         <input type="submit" value="Whatsapp" style="width: 100px; background-color: green;">
-         </div>
-         <style>
-          .metod {
-            display: flex;
-            justify-content: end;
-            gap: 10px;
-          }
-         </style>
-         <br>
-        <input type="submit" value="Simpan Transaksi">
+      <div class="form-group">
+        <label for="nama">Nama</label>
+        <input type="text" id="nama" name="nama" placeholder="Masukkan Nama" required>
+      </div>
+      
+      <!-- No HP -->
+      <div class="form-group">
+        <label for="no_hp">No HP</label>
+        <input type="tel" id="no_hp" name="no_hp" placeholder="Masukkan No HP" required>
+      </div>
+      
+      <!-- Tanggal Transaksi -->
+      <div class="form-group">
+        <label for="tanggal">Tanggal Transaksi</label>
+        <input type="text" id="tanggal" name="tanggal" value="<?php echo date('Y-m-d'); ?>" readonly>
+      </div>
+
+      <!-- Submit -->
+      <input type="submit" value="Simpan Transaksi">
     </form>
-    </div>
   </div>
 </body>
 </html>

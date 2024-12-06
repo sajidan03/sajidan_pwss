@@ -84,8 +84,8 @@ if (!isset($_SESSION["nama"])) {
                 <a href="index.php?page=editproduk&idproduk=<?= $data['idproduk'] ?>">
                     <button class="btnedit">Edit</button>
                 </a>
-            </td> 
-            <td><?= $data['']?></td>
+            </td>
+            <td></td>
         </tr>
         <?php
         $no++;

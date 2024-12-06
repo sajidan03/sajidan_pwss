@@ -66,6 +66,7 @@ session_start();
                 <div class="navbar">
                 <p style="color: #6495ed;">riGo</p>
                     <div class="kanan">
+                        <a href="index.php?page=profil">Profil</a>
                         <a href="logout.php">Logout</a>
                     </div>
                 </div>
@@ -169,7 +170,7 @@ session_start();
             case 'penjualan';
             include'penjualan.php';
             break;
-            case'profil.php';
+            case'profil';
                 if (file_exists('profil.php')) {
                     include'profil.php';
                 }else {
