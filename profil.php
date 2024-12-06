@@ -24,8 +24,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $username = mysqli_real_escape_string($koneksi, $_POST['username']);
         $password = !empty($_POST['password']) ? password_hash($_POST['password'], PASSWORD_DEFAULT) : $data['password']; // Hash password jika diubah
 
+        // Tangani foto profil jika ada yang diunggah
+        $foto = $data['foto']; // Default dengan foto lama jika tidak ada file yang diunggah
+        if ($_FILES['foto']['error'] == UPLOAD_ERR_OK) {
+            $target_dir = "uploads/"; // Folder tempat menyimpan foto
+            $foto = $target_dir . basename($_FILES['foto']['name']);
+            move_uploaded_file($_FILES['foto']['tmp_name'], $foto);
+        }
+
         // Query update data
-        $query_update = mysqli_query($koneksi, "UPDATE users SET nama='$nama', username='$username', password='$password' WHERE id='$id'");
+        $query_update = mysqli_query($koneksi, "UPDATE users SET nama='$nama', username='$username', password='$password', foto='$foto' WHERE id='$id'");
 
         if ($query_update) {
             $_SESSION['message'] = "Data berhasil diubah!";
@@ -44,128 +52,83 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Profil</title>
   <style>
-    /* Reset Styles */
-* {
-  box-sizing: border-box;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-/* Dasar Halaman */
-body {
-  font-family: 'Roboto', sans-serif;
-  /* background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: #f0f0f0; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
+    body {
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-/* Kontainer Utama */
-.container {
-  padding: 30px 40px;
-  border-radius: 12px;
-  /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); */
-  color: #ffffff;
-  /* transition: transform 0.2s ease, box-shadow 0.2s ease; */
-}
+    .container {
+      padding: 30px 40px;
+      border-radius: 12px;
+    }
 
-/* Efek hover pada container */
-.container:hover {
-  transform: translateY(-5px);
-  border-color: white 2px;
-  /* box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6); */
-}
+    h1 {
+      text-align: center;
+      font-size: 26px;
+      margin-bottom: 20px;
+      color: #a9c4ff;
+    }
 
-/* Judul */
-h1 {
-  text-align: center;
-  font-size: 26px;
-  margin-bottom: 20px;
-  color: #a9c4ff;
-}
+    .alert-message {
+      text-align: center;
+      color: #66d9ff;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
 
-/* Pesan Sukses/Error */
-.alert-message {
-  text-align: center;
-  color: #66d9ff;
-  margin-bottom: 15px;
-  font-size: 14px;
-  transition: color 0.3s ease;
-}
+    form {
+      margin-top: 10px;
+    }
 
-/* Form Styling */
-form {
-  margin-top: 10px;
-}
+    .table {
+      margin-bottom: 20px;
+    }
 
-.table {
-  margin-bottom: 20px;
-}
+    .table td {
+      padding: 10px;
+    }
 
-.table tr {
-  margin: 10px 0;
-}
+    table input[type="text"],
+    table input[type="password"] {
+      padding: 10px;
+      margin: 5px 0;
+      border: none;
+      background: #33334d;
+      color: #f0f0f0;
+      border-radius: 5px;
+    }
 
-.table td {
-  padding: 10px;
-}
+    .button-save {
+      background: linear-gradient(90deg, #5574ff, #4b65ff);
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+    }
 
-.table input[type="text"],
-.table input[type="password"] {
-  /* width: 100%; */
-  padding: 10px;
-  margin: 5px 0;
-  border: none;
-  background: #33334d;
-  color: #f0f0f0;
-  border-radius: 5px;
-  transition: all 0.2s ease;
-}
+    .foto-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
 
-.table input[type="text"]:focus,
-.table input[type="password"]:focus {
-  border: 2px solid #66d9ff;
-}
-
-/* Tombol Simpan */
-.button-save {
-  background: linear-gradient(90deg, #5574ff, #4b65ff);
-  color: #fff;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  text-align: center;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
-
-.button-save:hover {
-  background: linear-gradient(90deg, #4b65ff, #3f5bff);
-  transform: translateY(-3px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-.textt {
-  display: flex;
-  justify-content: center;
-}
-/* 
-@media (max-width: 768px) {
-  .container {
-    width: 95%;
-  }
-}
-
-@media (max-width: 480px) {
-  h1 {
-    font-size: 20px;
-  }
-
-  .button-save {
-    font-size: 14px;
-  }
-} */
-
+    .foto-container img {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
@@ -174,8 +137,15 @@ form {
   <?php if (isset($_SESSION['message'])): ?>
     <p class="alert-message"><?= $_SESSION['message']; unset($_SESSION['message']); ?></p>
   <?php endif; ?>
-  <form action="" method="post">
-  <div class="textt">
+
+  <form action="" method="post" enctype="multipart/form-data">
+    <div class="foto-container">
+      <?php if ($data['foto']): ?>
+        <img src="<?= htmlspecialchars($data['foto']); ?>" alt="Foto Profil">
+      <?php else: ?>
+        <img src="default-profile.png" alt="Foto Profil Default">
+      <?php endif; ?>
+    </div>
     <table class="table">
       <tr>
         <td>Nama</td>
@@ -190,12 +160,15 @@ form {
         <td><input type="password" name="password" placeholder="Kosongkan jika tidak ingin mengubah"></td>
       </tr>
       <tr>
+        <td>Foto Profil</td>
+        <td><input type="file" name="foto"></td>
+      </tr>
+      <tr>
         <td colspan="2">
           <button type="submit" name="save_changes" class="button-save">Simpan Perubahan</button>
         </td>
       </tr>
     </table>
-    </div>
   </form>
 </div>
 </body>

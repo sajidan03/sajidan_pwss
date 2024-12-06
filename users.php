@@ -62,6 +62,7 @@ if (!isset($_SESSION["nama"])) {
         <table border="1">
         <tr>
             <td>No</td>
+            <td>Foto profil</td>
             <td>Nama</td>
             <td>Username</td>
             <td>Password</td>
@@ -84,6 +85,16 @@ if (!isset($_SESSION["nama"])) {
     ?>
         <tr>
             <td><?= $no ?></td>
+            <td>
+                <?php 
+                if (!file_exists('uploads/'.$data['foto']) || $data['foto'] == "") {
+                    $foto = "default.jpg";
+                }else {
+                    $foto = $data['foto'];
+                }
+                ?>
+                <img src="uploads/<?= $foto ?>" alt="Gambar Produk" width="160" height="auto"></td>
+            </td>
             <td><?= $data['nama'] ?></td>
             <td><?= $data['username']?></td>
             <td><?= $data['password']?></td>

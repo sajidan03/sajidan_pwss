@@ -65,7 +65,7 @@ if (!isset($_SESSION["nama"])) {
                 ?>
                 <img src="uploads/<?= $foto ?>" alt="Gambar Produk" width="160" height="auto"></td>
             </td>
-            <td><?= $data['idkategori']?></td>
+            <td><?= $data['id_kategori']?></td>
             <td>
                 <a href="hapusdata5.php?idproduk=<?= $data['idproduk'] ?>" 
                     onclick="return confirm('Yakin menghapus <?= $data['nama_produk'] ?> ini?')">
