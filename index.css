@@ -47,7 +47,7 @@ body {
     background-color: #27496d ;
     border-radius: 6px;
     /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
-    width: 91%;
+    width: 100%;
 }
 
 /* Hero section */
@@ -183,7 +183,7 @@ body {
 
 .navbar .kanan {
     display: flex;
-    gap: 4px; /* Jarak antar menu */
+    gap: 4px;
     margin-right: 50px;
 }
 
@@ -194,6 +194,6 @@ body {
 }
 
 .navbar .kanan a:hover {
-    color: #4A90E2; /* Warna saat di-hover */
+    color: #4A90E2; 
     text-decoration: underline;
 }

@@ -1,49 +1,40 @@
 <?php
 if (!isset($_SESSION['nama'])) {
     header("location:index.php");
+    exit;
 }
 
-// Variabel default
-$profilePic = 'uploads/default-avatar.png';
-$name = isset($_SESSION['name']) ? $_SESSION['name'] : '';
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
+include "koneksi.php";
 
-// Cek apakah foto profil sudah ada
-if (file_exists('uploads/profile-pic.png')) {
-    $profilePic = 'uploads/profile-pic.png';
+// Cek apakah user sudah login
+$id = $_SESSION['id']; // Pastikan ada ID user di session
+$query = mysqli_query($koneksi, "SELECT * FROM users WHERE id='$id'");
+if (mysqli_num_rows($query) == 0) {
+    echo "Data tidak ditemukan!";
+    exit;
 }
 
-// Handle form submission
+$data = mysqli_fetch_array($query);
+
+// Handle form submission untuk edit data
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['upload_pic'])) {
-        // Proses upload foto
-        if (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] == 0) {
-            $targetDir = "uploads/";
-            $targetFile = $targetDir . "profile-pic.png";
-            $fileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+    if (isset($_POST['save_changes'])) {
+        // Validasi dan escape input
+        $nama = mysqli_real_escape_string($koneksi, $_POST['name']);
+        $username = mysqli_real_escape_string($koneksi, $_POST['username']);
+        $password = !empty($_POST['password']) ? password_hash($_POST['password'], PASSWORD_DEFAULT) : $data['password']; // Hash password jika diubah
 
-            // Validasi file
-            if (in_array($fileType, ['jpg', 'jpeg', 'png'])) {
-                if (!is_dir($targetDir)) {
-                    mkdir($targetDir, 0777, true);
-                }
-                move_uploaded_file($_FILES['profile_pic']['tmp_name'], $targetFile);
-                $_SESSION['message'] = "Foto profil berhasil diunggah!";
-            } else {
-                $_SESSION['message'] = "Hanya file JPG, JPEG, dan PNG yang diperbolehkan.";
-            }
+        // Query update data
+        $query_update = mysqli_query($koneksi, "UPDATE users SET nama='$nama', username='$username', password='$password' WHERE id='$id'");
+
+        if ($query_update) {
+            $_SESSION['message'] = "Data berhasil diubah!";
+            header("Location: profil.php");
+            exit;
         } else {
-            $_SESSION['message'] = "Gagal mengunggah foto.";
+            $_SESSION['message'] = "Data gagal diubah!";
         }
-    } elseif (isset($_POST['save_changes'])) {
-        // Simpan data profil
-        $_SESSION['name'] = $_POST['name'];
-        $_SESSION['username'] = $_POST['username'];
-        $_SESSION['message'] = "Perubahan berhasil disimpan!";
     }
-
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
 }
 ?>
 <!DOCTYPE html>
@@ -51,119 +42,161 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profil</title>
+  <title>Edit Profil</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #1b2838;
-      color: #c7d5e0;
-      margin: 0;
-      padding: 0;
-    }
-    .profile-container {
-      max-width: 600px;
-      margin: 50px auto;
-      background-color: #2a475e;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    .profile-container h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .profile-card {
-      text-align: center;
-    }
-    .profile-image img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border: 2px solid #c7d5e0;
-    }
-    .profile-image form {
-      margin-top: 10px;
-    }
-    .profile-image input,
-    .profile-image button {
-      margin-top: 5px;
-      padding: 5px 10px;
-      background-color: #66c0f4;
-      color: #1b2838;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .profile-form {
-      margin-top: 20px;
-    }
-    .form-group {
-      margin-bottom: 15px;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-    }
-    .form-group input {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 4px;
-      background-color: #1b2838;
-      color: #c7d5e0;
-    }
-    .form-group input:focus {
-      outline: none;
-      border: 2px solid #66c0f4;
-    }
-    #saveBtn {
-      width: 100%;
-      padding: 10px;
-      background-color: #66c0f4;
-      color: #1b2838;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    #saveBtn:hover {
-      background-color: #417a9b;
-    }
+    /* Reset Styles */
+* {
+  box-sizing: border-box;
+}
+
+/* Dasar Halaman */
+body {
+  font-family: 'Roboto', sans-serif;
+  /* background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #f0f0f0; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Kontainer Utama */
+.container {
+  padding: 30px 40px;
+  border-radius: 12px;
+  /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); */
+  color: #ffffff;
+  /* transition: transform 0.2s ease, box-shadow 0.2s ease; */
+}
+
+/* Efek hover pada container */
+.container:hover {
+  transform: translateY(-5px);
+  border-color: white 2px;
+  /* box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6); */
+}
+
+/* Judul */
+h1 {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #a9c4ff;
+}
+
+/* Pesan Sukses/Error */
+.alert-message {
+  text-align: center;
+  color: #66d9ff;
+  margin-bottom: 15px;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+/* Form Styling */
+form {
+  margin-top: 10px;
+}
+
+.table {
+  margin-bottom: 20px;
+}
+
+.table tr {
+  margin: 10px 0;
+}
+
+.table td {
+  padding: 10px;
+}
+
+.table input[type="text"],
+.table input[type="password"] {
+  /* width: 100%; */
+  padding: 10px;
+  margin: 5px 0;
+  border: none;
+  background: #33334d;
+  color: #f0f0f0;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+}
+
+.table input[type="text"]:focus,
+.table input[type="password"]:focus {
+  border: 2px solid #66d9ff;
+}
+
+/* Tombol Simpan */
+.button-save {
+  background: linear-gradient(90deg, #5574ff, #4b65ff);
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.button-save:hover {
+  background: linear-gradient(90deg, #4b65ff, #3f5bff);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.textt {
+  display: flex;
+  justify-content: center;
+}
+/* 
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  .button-save {
+    font-size: 14px;
+  }
+} */
+
   </style>
 </head>
 <body>
-  <div class="profile-container">
-    <h1>Profil Saya</h1>
-    <div class="profile-card">
-      <?php if (isset($_SESSION['message'])): ?>
-        <p style="color: #66c0f4;"><?= $_SESSION['message'] ?></p>
-        <?php unset($_SESSION['message']); ?>
-      <?php endif; ?>
-      <div class="profile-image">
-        <img src="<?= $profilePic ?>" alt="Foto Profil">
-        <form action="" method="post" enctype="multipart/form-data">
-          <input type="file" name="profile_pic" accept="image/*" required>
-          <button type="submit" name="upload_pic">Upload Foto</button>
-        </form>
-      </div>
-      <form action="" method="post" class="profile-form">
-        <div class="form-group">
-          <label for="name">Nama</label>
-          <input type="text" id="name" name="name" value="<?= htmlspecialchars($name) ?>" required>
-        </div>
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" id="username" name="username" value="<?= htmlspecialchars($username) ?>" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" required>
-        </div>
-        <div class="form-group">
-          <button type="submit" name="save_changes" id="saveBtn">Simpan Perubahan</button>
-        </div>
-      </form>
+<div class="container">
+  <h1>Edit Profil</h1>
+  <?php if (isset($_SESSION['message'])): ?>
+    <p class="alert-message"><?= $_SESSION['message']; unset($_SESSION['message']); ?></p>
+  <?php endif; ?>
+  <form action="" method="post">
+  <div class="textt">
+    <table class="table">
+      <tr>
+        <td>Nama</td>
+        <td><input type="text" name="name" value="<?= htmlspecialchars($data['nama']); ?>" required></td>
+      </tr>
+      <tr>
+        <td>Username</td>
+        <td><input type="text" name="username" value="<?= htmlspecialchars($data['username']); ?>" required></td>
+      </tr>
+      <tr>
+        <td>Password</td>
+        <td><input type="password" name="password" placeholder="Kosongkan jika tidak ingin mengubah"></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button type="submit" name="save_changes" class="button-save">Simpan Perubahan</button>
+        </td>
+      </tr>
+    </table>
     </div>
-  </div>
+  </form>
+</div>
 </body>
 </html>
